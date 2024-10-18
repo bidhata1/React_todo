@@ -1,0 +1,129 @@
+/* css/todo.css */
+
+.main-container {
+    max-width: 600px;
+    margin: 50px auto;
+    margin-top: 80px;
+    margin-bottom: 40px;
+    padding: 40px;
+    background-color: #aaa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title{
+    margin-top: -30px;
+    margin-bottom: 10px;
+}
+.todo-input {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.todo-first{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;   
+}
+.todo-second{
+    display: flex;
+    flex-direction: row;
+    gap:40px;
+}
+.todo-first .todo-input-field{
+    width: 288px;
+}
+
+.todo-input-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.todo-input-field label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.todo-input-field input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.todo-input-field input:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+.todo-input-field input::placeholder {
+    color: #aaa;
+}
+.button{
+    align-items: end;
+}
+
+/* Date and button container styling */
+.todo-second {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: center; /* Aligns the date input and button vertically */
+    justify-content: space-between; /* Spaces out the date and button */
+}
+
+/* Date input field styling */
+.todo-input-fields input[type="date"] {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    width: 100%; /* Ensures the date picker takes full width of its container */
+}
+
+.todo-input-fields input[type="date"]:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Adds a focus effect */
+}
+
+/* Button styling */
+.button{
+    margin-top: 10px;
+}
+.button button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: orangered;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button button:hover {
+    background-color: #0056b3;
+}
+
+.button button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Adds a focus effect */
+}
+
+/* Ensure the button and date input are properly aligned */
+.todo-second .button {
+    flex-shrink: 0; /* Prevents the button from shrinking when space is tight */
+}
+.todo-input-fields {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 450px;
+}
