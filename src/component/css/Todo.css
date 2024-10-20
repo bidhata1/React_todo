@@ -1,10 +1,9 @@
-/* css/todo.css */
 
 .main-container {
     max-width: 600px;
     margin: 50px auto;
-    margin-top: 80px;
-    margin-bottom: 40px;
+    margin-top: 30px;
+    margin-bottom: 30px;
     padding: 40px;
     background-color: #aaa;
     border-radius: 8px;
@@ -71,8 +70,8 @@
     display: flex;
     flex-direction: row;
     gap: 40px;
-    align-items: center; /* Aligns the date input and button vertically */
-    justify-content: space-between; /* Spaces out the date and button */
+    align-items: center; 
+    justify-content: space-between;
 }
 
 /* Date input field styling */
@@ -83,7 +82,7 @@
     border-radius: 4px;
     background-color: #fff;
     cursor: pointer;
-    width: 100%; /* Ensures the date picker takes full width of its container */
+    width: 100%; 
 }
 
 .todo-input-fields input[type="date"]:focus {
@@ -117,9 +116,9 @@
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Adds a focus effect */
 }
 
-/* Ensure the button and date input are properly aligned */
+
 .todo-second .button {
-    flex-shrink: 0; /* Prevents the button from shrinking when space is tight */
+    flex-shrink: 0; 
 }
 .todo-input-fields {
     display: flex;
@@ -127,3 +126,81 @@
     margin-bottom: 10px;
     width: 450px;
 }
+
+
+
+
+.title h2 {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Task list container styling */
+.task-list {
+    margin: 20px 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Styling the table */
+  .task-list table {
+    max-width: 800px;
+    width: 100%;
+    margin-left: 17rem;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .task-list th {
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+  }
+  
+ 
+  .task-list td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Button styling */
+  .task-list button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    margin-right: 8px;
+    font-size: 14px;
+  }
+  
+  .task-list button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Delete button specific styling */
+  .task-list .delete-button {
+    background-color: #dc3545;
+  }
+  
+  .task-list .delete-button:hover {
+    background-color: #c82333;
+  }
+  
+  
+  .task-list th, 
+  .task-list td {
+    text-align: left;
+    padding: 12px;
+  }
+  
+
+  
+  
