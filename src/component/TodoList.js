@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './css/Todo.css';
 
 
@@ -12,6 +12,21 @@ const TodoList=()=>{
 
     //state to store the list of tasks
     const[tasks,setTasks]=useState([]);
+
+// Load tasks from localStorage when the component mounts
+useEffect(() => {
+  const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+  if (storedTasks) {
+    setTasks(storedTasks);  // Set tasks if found in localStorage
+  }
+}, []);
+
+// Save tasks to localStorage whenever tasks change
+useEffect(() => {
+  if (tasks.length > 0) {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }
+}, [tasks]);
 
     //Function to handle ading a new task
     const handleSubmit=(e)=>{
@@ -56,6 +71,7 @@ const TodoList=()=>{
         const deleteTask = (id) => {
           const updatedTasks = tasks.filter((task) => task.id !== id);
           setTasks(updatedTasks);
+          localStorage.setItem('tasks', JSON.stringify(updatedTasks));
         };
       
         // Function to edit a task
@@ -66,6 +82,13 @@ const TodoList=()=>{
           setDate(task.date);
           setEditTaskId(task.id);
         };
+        const toggleCompletion = (id) => {
+          const updatedTasks = tasks.map((task) =>
+              task.id === id ? { ...task, completed: !task.completed } : task
+          );
+          setTasks(updatedTasks);
+          localStorage.setItem('tasks', JSON.stringify(updatedTasks)); // Update localStorage
+      };
       
 
     return (
@@ -101,7 +124,7 @@ const TodoList=()=>{
             />
                     </div>
                     <div className='button'>
-                        <button type='submit'>Add Task</button>
+                    <button type='submit'>{editTaskId ? 'Update Task' : 'Add Task'}</button>
                     </div>
                 </div>
 
@@ -117,6 +140,7 @@ const TodoList=()=>{
     <table>
       <thead>
         <tr>
+          <th>Completed</th>
           <th>Title</th>
           <th>Category</th>
           <th>Description</th>
@@ -127,6 +151,10 @@ const TodoList=()=>{
       <tbody>
         {tasks.map((task) => (
           <tr key={task.id}>
+            <td>
+              <input type="checkbox" checked={task.completed}
+                  onChange={() => toggleCompletion(task.id)}/>
+            </td>
             <td>{task.title}</td>
             <td>{task.category}</td>
             <td>{task.description}</td>
