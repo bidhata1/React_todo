@@ -3,12 +3,14 @@ import './css/Todo.css';
 
 
 const TodoList=()=>{
-    //state for input fields
-    const[title,setTitle]=useState('');
-    const [category,setCategory]=useState('');
-    const[description, setDescription]=useState('');
-    const[date, setDate]=useState('');
-    const[editTaskId, setEditTaskId]=useState(null);
+    //group state for input fields and task editing
+    const[taskData, setTaskData]=useState({
+      title:'',
+      category:'',
+      description:'',
+      date:'',
+      editTaskId:null,
+    });
 
     //state to store the list of tasks
     const[tasks,setTasks]=useState([]);
@@ -32,6 +34,8 @@ useEffect(() => {
     const handleSubmit=(e)=>{
         e.preventDefault();
     
+        const{title, category,description,date,editTaskId}=taskData;
+
         if (!title || !category || !description || !date) {
             alert('Please fill out all fields.');
             return;
@@ -45,7 +49,7 @@ useEffect(() => {
                 : task
             );
             setTasks(updatedTasks);
-            setEditTaskId(null);
+            setTaskData({title:'',category:'', description:'',date:'',editTaskId:null});
           } else {
             // Create new task object
             const newTask = {
@@ -54,18 +58,14 @@ useEffect(() => {
               category,
               description,
               date,
+              completed:false,
             };
       
             // Add the new task to the task array
             setTasks([...tasks, newTask]);
+            setTaskData({ title: '', category: '', description: '', date: '', editTaskId: null });
         }
-      
-          // Clear input fields after adding/updating
-          setTitle('');
-          setCategory('');
-          setDescription('');
-          setDate('');
-        };
+    };
       
         // Function to delete a task
         const deleteTask = (id) => {
@@ -76,11 +76,13 @@ useEffect(() => {
       
         // Function to edit a task
         const editTask = (task) => {
-          setTitle(task.title);
-          setCategory(task.category);
-          setDescription(task.description);
-          setDate(task.date);
-          setEditTaskId(task.id);
+          setTaskData({
+            title:task.title,
+            category:task.category,
+            description:task.description,
+            date:task.date,
+            editTaskId:task.id,
+          });
         };
         const toggleCompletion = (id) => {
           const updatedTasks = tasks.map((task) =>
@@ -101,30 +103,30 @@ useEffect(() => {
                 <div className='todo-first'>
                     <div className="todo-input-field">
                         <label>Title</label>
-                        <input type="text" placeholder="Enter the title of the task" value={title}
-              onChange={(e) => setTitle(e.target.value)}/>
+                        <input type="text" placeholder="Enter the title of the task" value={taskData.title}
+              onChange={(e) => setTaskData({...taskData, title: e.target.value})}/>
                     </div>
                     <div className="todo-input-field">
                         <label>Category</label>
-                        <input type="text" placeholder="Enter the category" value={category}
-              onChange={(e) => setCategory(e.target.value)} />
+                        <input type="text" placeholder="Enter the category" value={taskData.category}
+              onChange={(e) => setTaskData({...taskData, category: e.target.value})} />
                     </div>
                 </div>
                 
                 <div className="todo-input-field">
                     <label>Description</label>
-                    <input type="textarea" placeholder="Enter the description" value={description}
-            onChange={(e) => setDescription(e.target.value)}/>
+                    <input type="textarea" placeholder="Enter the description" value={taskData.description}
+            onChange={(e) => setTaskData({...taskData,description: e.target.value})}/>
                 </div>
                 <div className='todo-second'>
                     <div className="todo-input-fields">
                         <label>Date</label>
-                        <input type="date" placeholder="Select the Date"  value={date}
-              onChange={(e) => setDate(e.target.value)} // Update date state
+                        <input type="date" placeholder="Select the Date"  value={taskData.date}
+              onChange={(e) => setTaskData({...taskData, date: e.target.value})} // Update date state
             />
                     </div>
                     <div className='button'>
-                    <button type='submit'>{editTaskId ? 'Update Task' : 'Add Task'}</button>
+                    <button type='submit'>{taskData.editTaskId ? 'Update Task' : 'Add Task'}</button>
                     </div>
                 </div>
 
